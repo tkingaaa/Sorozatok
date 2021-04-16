@@ -11,10 +11,10 @@ export default class Sorozat{
 
     constructor(adatok: string[]){
         const a: string[] = adatok;
-        this._datum = a[0];
-        this._cim = a[1];
-        this._resz = a[2];
-        this._hossz = parseInt(a[3]);
+        this._datum = a[0].trim();
+        this._cim = a[1].trim();
+        this._resz = a[2].trim();
+        this._hossz = parseInt(a[3].trim());
         if (a[4] == '0') {
             this._latta=true;
         } else {

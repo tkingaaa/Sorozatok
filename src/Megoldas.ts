@@ -15,8 +15,8 @@ export default class Megoldas{
     }
 
     public constructor(forrás: string){
-        const adatok: string[] = fs.readFileSync(forrás).toString().split("\n");
-        for (let i = 0; i < adatok.length; i+5) {
+        const adatok: string[] = fs.readFileSync(forrás).toString().split('\n');
+        for (let i = 0; i < adatok.length; i+=5) {
             let aktadatok: string[] = [];
             aktadatok.push(adatok[i]);
             aktadatok.push(adatok[i+1]);
