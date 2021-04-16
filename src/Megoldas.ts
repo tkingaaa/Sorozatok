@@ -51,6 +51,17 @@ export default class Megoldas {
         return napok[(ev + ev / 4 - ev / 100 + ev / 400 + honapok[ho - 1] + nap) % 7];
     }
 
+    public adottNapKiir(benap: string): string[] {
+        const cimek: string[] = [];
+        for (const e of this._epizodok) {
+            const aktdatum: string[] = e.datum.split(".");
+            if (benap == this.hetnapja(parseInt(aktdatum[0]), parseInt(aktdatum[1]), parseInt(aktdatum[2]))) {
+                cimek.push(e.cim);
+            }
+        }
+        return cimek;
+    }
+
     public constructor(forrás: string) {
         const adatok: string[] = fs.readFileSync(forrás).toString().split("\n");
         for (let i = 0; i < adatok.length; i += 5) {

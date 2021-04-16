@@ -38,6 +38,13 @@ export default class Content {
         for (const r of reszek) {
             res.write(`${r}\n`);
         }
+        res.write("7. feladat:\n");
+        const nap: string = params.nap as string;
+        res.write(`Adja meg a hét egy napját (például cs)! Nap =  <input type='text' name='nap' value='${nap}' style='max-width:100px;' onChange='this.form.submit();'>\n`);
+        const cimek: string[] = mo.adottNapKiir(nap);
+        for (const c of cimek) {
+            res.write(`${c}\n`);
+        }
         // <---- Fejezd be a kódolást
 
         res.write("</pre></form></body></html>");
