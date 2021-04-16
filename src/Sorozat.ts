@@ -9,16 +9,24 @@ export default class Sorozat{
         return this._datum;
     }
 
+    public get hossz(): number{
+        return this._hossz;
+    }
+
+    public get latta(): boolean{
+        return this._latta;
+    }
+
     constructor(adatok: string[]){
         const a: string[] = adatok;
         this._datum = a[0].trim();
         this._cim = a[1].trim();
         this._resz = a[2].trim();
-        this._hossz = parseInt(a[3].trim());
-        if (a[4] == '0') {
-            this._latta=true;
+        this._hossz = parseInt(a[3]);
+        if (a[4].trim() == '0') {
+            this._latta=false;
         } else {
-            this._latta = false;
+            this._latta = true;
         }
     }
 }

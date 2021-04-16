@@ -28,7 +28,9 @@ export default class Content {
 
         const mo: Megoldas = new Megoldas("lista.txt");
 
-        res.write(`2. feladat: A listában ${mo.megjelentEpizodokSzama} db vetítési dátummal rendelkező epizód van.`);
+        res.write(`2. feladat: A listában ${mo.megjelentEpizodokSzama} db vetítési dátummal rendelkező epizód van.\n`);
+        res.write(`3. feladat: A listában lévő epizódok ${mo.lattaSzazalek.toFixed(2)}%-át látta.\n`);
+        res.write(`4. feladat: Sorozatnézéssel ${(Math.floor(mo.eltoltottIdo/1440))} napot ${Math.floor((mo.eltoltottIdo%1440)/60)} órát és ${mo.eltoltottIdo%60} percet töltött.\n`);
         // <---- Fejezd be a kódolást
 
         res.write("</pre></form></body></html>");

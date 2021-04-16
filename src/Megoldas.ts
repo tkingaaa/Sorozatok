@@ -14,6 +14,26 @@ export default class Megoldas{
         return db;
     }
 
+    public get lattaSzazalek(): number{
+        let lattadb: number = 0;
+        for (const e of this._epizodok) {
+            if (e.latta == true) {
+                lattadb++;
+            }
+        }
+        return (lattadb / this._epizodok.length)*100;
+    }
+
+    public get eltoltottIdo(): number{
+        let osszesperc: number = 0;
+        for (const e of this._epizodok) {
+            if (e.latta == true) {
+                osszesperc += e.hossz;
+            }
+        }
+        return osszesperc;
+    }
+
     public constructor(forrás: string){
         const adatok: string[] = fs.readFileSync(forrás).toString().split('\n');
         for (let i = 0; i < adatok.length; i+=5) {
