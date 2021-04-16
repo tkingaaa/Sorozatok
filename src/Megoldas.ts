@@ -44,6 +44,13 @@ export default class Megoldas {
         return reszek;
     }
 
+    public hetnapja(ev: number, ho: number, nap: number): string {
+        const napok: string[] = ["v", "h", "k", "sze", "cs", "p", "szo"];
+        const honapok: number[] = [0, 3, 2, 5, 0, 3, 5, 1, 4, 6, 2, 4];
+        if (ho < 3) ev--;
+        return napok[(ev + ev / 4 - ev / 100 + ev / 400 + honapok[ho - 1] + nap) % 7];
+    }
+
     public constructor(forrás: string) {
         const adatok: string[] = fs.readFileSync(forrás).toString().split("\n");
         for (let i = 0; i < adatok.length; i += 5) {
