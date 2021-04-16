@@ -1,7 +1,7 @@
 import Sorozat from "./Sorozat";
 import fs from "fs";
 
-export default class Megoldas{
+export default class Megoldas {
     private _epizodok: Sorozat[] = [];
 
     public get megjelentEpizodokSzama(): number {
@@ -14,17 +14,17 @@ export default class Megoldas{
         return db;
     }
 
-    public get lattaSzazalek(): number{
+    public get lattaSzazalek(): number {
         let lattadb: number = 0;
         for (const e of this._epizodok) {
             if (e.latta == true) {
                 lattadb++;
             }
         }
-        return (lattadb / this._epizodok.length)*100;
+        return (lattadb / this._epizodok.length) * 100;
     }
 
-    public get eltoltottIdo(): number{
+    public get eltoltottIdo(): number {
         let osszesperc: number = 0;
         for (const e of this._epizodok) {
             if (e.latta == true) {
@@ -34,15 +34,25 @@ export default class Megoldas{
         return osszesperc;
     }
 
-    public constructor(forrás: string){
-        const adatok: string[] = fs.readFileSync(forrás).toString().split('\n');
-        for (let i = 0; i < adatok.length; i+=5) {
-            let aktadatok: string[] = [];
+    public nemlattaKiir(bedatum: string): string[] {
+        const reszek: string[] = [];
+        for (const e of this._epizodok) {
+            if (Date.parse(e.datum) <= Date.parse(bedatum) && e.latta == false) {
+                reszek.push(`${e.resz}\t${e.cim}`);
+            }
+        }
+        return reszek;
+    }
+
+    public constructor(forrás: string) {
+        const adatok: string[] = fs.readFileSync(forrás).toString().split("\n");
+        for (let i = 0; i < adatok.length; i += 5) {
+            const aktadatok: string[] = [];
             aktadatok.push(adatok[i]);
-            aktadatok.push(adatok[i+1]);
-            aktadatok.push(adatok[i+2]);
-            aktadatok.push(adatok[i+3]);
-            aktadatok.push(adatok[i+4]);
+            aktadatok.push(adatok[i + 1]);
+            aktadatok.push(adatok[i + 2]);
+            aktadatok.push(adatok[i + 3]);
+            aktadatok.push(adatok[i + 4]);
             this._epizodok.push(new Sorozat(aktadatok));
         }
     }
