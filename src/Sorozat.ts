@@ -5,6 +5,10 @@ export default class Sorozat{
     private _hossz: number;
     private _latta: boolean;
 
+    public get datum(): string{
+        return this._datum;
+    }
+
     constructor(adatok: string[]){
         const a: string[] = adatok;
         this._datum = a[0];

@@ -28,7 +28,7 @@ export default class Content {
 
         const mo: Megoldas = new Megoldas("lista.txt");
 
-
+        res.write(`2. feladat: A listában ${mo.megjelentEpizodokSzama} db vetítési dátummal rendelkező epizód van.`);
         // <---- Fejezd be a kódolást
 
         res.write("</pre></form></body></html>");
