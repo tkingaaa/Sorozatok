@@ -1,8 +1,10 @@
 import Sorozat from "./Sorozat";
+import Evad from "./Evad";
 import fs from "fs";
 
 export default class Megoldas {
     private _epizodok: Sorozat[] = [];
+    private _evadok: Evad[] = [];
 
     public get megjelentEpizodokSzama(): number {
         let db: number = 0;
