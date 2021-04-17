@@ -48,7 +48,7 @@ export default class Megoldas {
         const napok: string[] = ["v", "h", "k", "sze", "cs", "p", "szo"];
         const honapok: number[] = [0, 3, 2, 5, 0, 3, 5, 1, 4, 6, 2, 4];
         if (ho < 3) ev--;
-        return napok[(ev + ev / 4 - ev / 100 + ev / 400 + honapok[ho - 1] + nap) % 7];
+        return napok[(ev + Math.floor(ev / 4) - Math.floor(ev / 100) + Math.floor(ev / 400) + honapok[ho - 1] + nap) % 7];
     }
 
     public adottNapKiir(benap: string): string[] {
@@ -56,7 +56,9 @@ export default class Megoldas {
         for (const e of this._epizodok) {
             const aktdatum: string[] = e.datum.split(".");
             if (benap == this.hetnapja(parseInt(aktdatum[0]), parseInt(aktdatum[1]), parseInt(aktdatum[2]))) {
-                cimek.push(e.cim);
+                if (!cimek.includes(e.cim)) {
+                    cimek.push(e.cim);
+                }
             }
         }
         return cimek;
