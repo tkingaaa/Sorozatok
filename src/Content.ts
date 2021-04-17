@@ -42,7 +42,7 @@ export default class Content {
         const nap: string = params.nap as string;
         res.write(`Adja meg a hét egy napját (például cs)! Nap =  <input type='text' name='nap' value='${nap}' style='max-width:100px;' onChange='this.form.submit();'>\n`);
         const cimek: string[] = mo.adottNapKiir(nap);
-        if (cimek.length != 0) {
+        if (nap != undefined && cimek.length != 0) {
             for (const c of cimek) {
                 res.write(`${c}\n`);
             }
