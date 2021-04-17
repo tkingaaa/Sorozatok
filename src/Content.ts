@@ -49,6 +49,8 @@ export default class Content {
         } else {
             res.write("Az adott napon nem került adásba sorozat!\n");
         }
+
+        mo.summaÁllománybaÍr("summa.txt");
         // <---- Fejezd be a kódolást
 
         res.write("</pre></form></body></html>");

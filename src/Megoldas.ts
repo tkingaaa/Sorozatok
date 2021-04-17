@@ -1,10 +1,8 @@
 import Sorozat from "./Sorozat";
-import Evad from "./Evad";
 import fs from "fs";
 
 export default class Megoldas {
     private _epizodok: Sorozat[] = [];
-    private _evadok: Evad[] = [];
 
     public get megjelentEpizodokSzama(): number {
         let db: number = 0;
@@ -66,6 +64,38 @@ export default class Megoldas {
         return cimek;
     }
 
+    public epizodokSzama(cim: string): number {
+        let epizodok: number = 0;
+        for (const e of this._epizodok) {
+            if (cim == e.cim) {
+                epizodok++;
+            }
+        }
+        return epizodok;
+    }
+
+    public osszHossz(cim: string): number {
+        let ossz: number = 0;
+        for (const e of this._epizodok) {
+            if (cim == e.cim) {
+                ossz += e.hossz;
+            }
+        }
+        return ossz;
+    }
+
+    public get evadokArray(): string[] {
+        const cimek: string[] = [];
+        const evadok: string[] = [];
+        for (const e of this._epizodok) {
+            if (!cimek.includes(e.cim)) {
+                evadok.push(`${e.cim} ${this.osszHossz(e.cim)} ${this.epizodokSzama(e.cim)}`);
+                cimek.push(e.cim);
+            }
+        }
+        return evadok;
+    }
+
     public constructor(forrás: string) {
         const adatok: string[] = fs.readFileSync(forrás).toString().split("\n");
         for (let i = 0; i < adatok.length; i += 5) {
@@ -77,5 +107,13 @@ export default class Megoldas {
             aktadatok.push(adatok[i + 4]);
             this._epizodok.push(new Sorozat(aktadatok));
         }
+    }
+
+    public summaÁllománybaÍr(állomány: string): void {
+        const ki: string[] = [];
+        this.evadokArray.forEach(i => {
+            ki.push(i);
+        });
+        fs.writeFileSync(állomány, ki.join("\r"));
     }
 }
